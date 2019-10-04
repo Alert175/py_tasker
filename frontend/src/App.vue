@@ -10,11 +10,16 @@ export default {
 	}),
 	methods: {
 		check_auth(){
-			if(localStorage.getItem("auth") === null){
-				this.$router.push("/auth")
+			if(localStorage.getItem("auth") !== null){
+				if(localStorage.getItem("user_id") !== null){
+					console.log("auth succes");
+				}
+				else{
+					this.$router.push("/auth");
+				}
 			}
 			else{
-				
+				this.$router.push("/auth");
 			}
 		}
 	},

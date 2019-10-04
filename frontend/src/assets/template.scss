@@ -13,6 +13,15 @@ $bg-dark: rgba(0, 0, 0, 0.65);
 	justify-items: center;
 	align-items: center;
 }
+.wrapper-fixed{
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	background-color: $white;
+}
 .content{
 	width: 80%;
 	max-width: 1400px;

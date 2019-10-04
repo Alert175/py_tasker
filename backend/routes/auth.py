@@ -45,8 +45,7 @@ def login():
 			else:
 				if "tasks_array" in user and "user_name" in user:
 					response_data = {
-						"user_name": user["user_name"],
-						"tasks": user["tasks_array"]
+						"user_name": user["user_name"]
 					}
 					return make_response(jsonify(response_data), 200)
 				else:

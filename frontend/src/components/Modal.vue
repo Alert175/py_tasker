@@ -75,9 +75,7 @@ export default {
 				}
 			}
 			else{
-				this.info_for_popup = "необходимо заполнить поле";
-				this.popup_color = "255, 98, 98, 1";
-				this.show_popup = true;
+				this.call_popup("необходимо заполнить поле", "255, 98, 98, 1");
 			}
 		},
 		async login(){
@@ -87,26 +85,21 @@ export default {
 						"user_id": JSON.stringify(this.user_id)
 					});
 					if(response.data === "user_not_found"){
-						this.info_for_popup = "пользователь не найден";
-						this.popup_color = "255, 98, 98, 1";
-						this.show_popup = true;
+						this.call_popup("пользователь не найден", "255, 98, 98, 1");
 					}
 					else{
-						console.log(response.data)
+						localStorage.setItem("auth", true);
 						this.call_popup(`Добро пожаловать ${response.data.user_name}`, "83, 144, 219, 1");
+						this.$router.push("/");
 					}
 				}
 				else{
-					this.info_for_popup = "необходимо заполнить поле";
-					this.popup_color = "255, 98, 98, 1";
-					this.show_popup = true;
+					this.call_popup("необходимо заполнить поле", "255, 98, 98, 1");
 				}
 			}
 			catch(error){
 				console.error(error);
-				this.info_for_popup = "попробуйте еще раз";
-				this.popup_color = "255, 98, 98, 1";
-				this.show_popup = true;
+				this.call_popup("попробуйте еще раз", "255, 98, 98, 1");
 			}
 		}
 	},

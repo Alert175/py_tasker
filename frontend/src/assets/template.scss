@@ -1,0 +1,134 @@
+/* colors */
+$dark: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+$light-gray: rgb(182, 182, 182);
+$dark-gray: #5c5c5c;
+$bg-dark: rgba(0, 0, 0, 0.65);
+
+/* styles */
+.wrapper{
+	width: 100%;
+	height: auto;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+}
+.content{
+	width: 80%;
+	max-width: 1400px;
+	margin: auto auto;
+	@media screen and (min-width: 2200px){
+		max-width: 1800px;
+	}
+	@media screen and (max-width: 1400px){
+		max-width: 1200px;
+		width: 85%;
+	}
+	@media screen and (max-width: 992px){
+		max-width: 90%;
+		width: 90%;
+	}
+	@media screen and (max-width: 768px){
+		max-width: 95%;
+		width: 95%;
+	}
+	@media screen and (max-width: 540px){
+		max-width: 100%;
+		width: 100%;
+	}
+}
+.grid-center{
+	width: 100%;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+}
+.line-center{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+.line-start{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+.line-end{
+	justify-self: end;
+}
+.col-1{
+	width: 100%;
+	height: auto;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(1, 1fr);
+	grid-gap: 5px;
+}
+.col-2{
+	width: 100%;
+	height: auto;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 5px;
+	@media screen and (max-width: 540px){
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+.col-3{
+	width: 100%;
+	height: auto;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 5px;
+	@media screen and (max-width: 540px){
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+.col-6{
+	width: 100%;
+	height: auto;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(6, 1fr);
+	grid-gap: 5px;
+	@media screen and (max-width: 768px){
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media screen and (max-width: 540px){
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+button{
+	outline: none;
+	cursor: pointer;
+}
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.header{
+	color: $dark;
+	width: 100%;
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin: 5vh 0px;
+	@media screen and (min-width: 2200px){
+		font-size: 2.8rem;
+	}
+}
+a{
+	text-decoration: none;
+	color: $white;
+}

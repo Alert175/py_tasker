@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["404"],{"8cdb":function(t,e,n){"use strict";n.r(e);var s=function(){var t=this,e=t.$createElement;t._self._c;return t._m(0)},c=[function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"wrapper"},[n("div",{staticClass:"content"},[n("h1",[t._v("404")])])])}],a=n("2877"),r={},l=Object(a["a"])(r,s,c,!1,null,null,null);e["default"]=l.exports}}]);
+//# sourceMappingURL=404.4f24f3db.js.map

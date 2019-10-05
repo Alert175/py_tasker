@@ -6,21 +6,19 @@ Vue.use(Router);
 export default new Router({
 	routes: [
 		{
-			path: "/",
-			name: "Main",
-			component: () =>
-			import(/* webpackChunkName: "main" */ "./views/Main.vue")
+			path: "/main",
+			name: "main",
+			component: () => import(/* webpackChunkName: "main" */ "./views/Main.vue")
 		},
 		{
 			path: "/auth",
 			name: "auth",
-			component: () =>
-			import(/* webpackChunkName: "about" */ "./views/Auth.vue")
+			component: () => import(/* webpackChunkName: "about" */ "./views/Auth.vue")
 		},
 		{
 			path: '/*',
 			name: '404',
-			component: () => import('./views/404.vue')
+			component: () => import(/* webpackChunkName: "404" */ "./views/404.vue")
 		}
 	],
 	mode: "history"

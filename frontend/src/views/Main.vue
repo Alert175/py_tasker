@@ -2,7 +2,7 @@
 	<div class="wrapper">
 		<div class="header">Задачи</div>
 			<div class="content">
-				<div class="tasks" v-for="(item, index) in user_tasks" :key="index"></div>
+				<task class="tasks" v-for="(item, index) in user_tasks" :key="index" :task="item" :id_task="index"></task>
 			</div>
 		<transition name="show" mode="out-in">
 			<popup v-if="show_popup" :info="info_for_popup" :color="popup_color" @close_popup="show_popup = false"></popup>
@@ -14,11 +14,13 @@
 const axios = require("axios");
 export default {
 	components:{
-		popup: ()=> import(/* webpackChunkName: "Popup" */ "@/components/Popup.vue")
+		popup: ()=> import(/* webpackChunkName: "Popup" */ "@/components/Popup.vue"),
+		task: ()=> import(/* webpackChunkName: "Task" */ "@/components/Task.vue")
 	},
 	data: ()=> ({
 		user_tasks: [],
 		user_id: null,
+		user_name: null,
 		show_popup: false,
 		info_for_popup: null,
 		popup_color: null
@@ -37,9 +39,12 @@ export default {
 				const responce = await axios.post("api/task/get_tasks", {
 					"user_id": JSON.stringify(this.user_id)
 				});
-				this.call_popup("Данные получены", "43, 163, 255, 1");
-				console.log(responce.data);
-
+				this.user_tasks.length = 0;
+				this.user_name = responce.data.user_name;
+				this.call_popup(`Привет ${this.user_name}`, "43, 163, 255, 1");
+				for (const iterator of responce.data.tasks) {
+					this.user_tasks.push(iterator);
+				}
 			}
 			catch(error){
 				console.error(error);

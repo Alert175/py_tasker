@@ -4,6 +4,7 @@
 	</div>
 </template>
 <script>
+const axios = require("axios");
 export default {
 	data:()=>({
 
@@ -13,6 +14,7 @@ export default {
 			if(localStorage.getItem("auth") !== null){
 				if(localStorage.getItem("user_id") !== null){
 					console.log("auth succes");
+
 				}
 				else{
 					this.$router.push("/auth");

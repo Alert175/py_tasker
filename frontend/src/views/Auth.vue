@@ -30,8 +30,6 @@ export default {
 			this.value_modal = "old_user";
 			this.show_modal = true
 		}
-	},
-	created() {
 	}
 }
 </script>

@@ -39,16 +39,20 @@ def login():
 		data = request.json
 		if "user_id" in data:
 			user_id = json.loads(data["user_id"])
-			user = db.info.find_one({'_id': ObjectId(user_id)})
-			if user == None:
-				return make_response("user_not_found", 200)
-			else:
-				if "tasks_array" in user and "user_name" in user:
-					response_data = {
-						"user_name": user["user_name"]
-					}
-					return make_response(jsonify(response_data), 200)
+			try:
+				user = db.info.find_one({'_id': ObjectId(user_id)})
+				if user == None:
+					return make_response("user_not_found", 401)
 				else:
-					return(400)
+					if "tasks_array" in user and "user_name" in user:
+						response_data = {
+							"user_name": user["user_name"]
+						}
+						return make_response(jsonify(response_data), 200)
+					else:
+						return(400)
+			except Exception as error:
+				print("internal error databases - {error}".format(error=error))
+				return make_response("internal error databases", 401)
 		else:
 			return(400)

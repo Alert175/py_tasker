@@ -84,22 +84,23 @@ export default {
 					const response = await axios.post("api/auth/login",{
 						"user_id": JSON.stringify(this.user_id)
 					});
-					if(response.data === "user_not_found"){
-						this.call_popup("пользователь не найден", "255, 98, 98, 1");
-					}
-					else{
-						localStorage.setItem("auth", true);
-						this.call_popup(`Добро пожаловать ${response.data.user_name}`, "83, 144, 219, 1");
-						this.$router.push("/");
-					}
+					localStorage.setItem("auth", true);
+					localStorage.setItem("user_id", this.user_id);
+					this.call_popup(`Добро пожаловать ${response.data.user_name}`, "83, 144, 219, 1");
+					this.$router.push("/");
 				}
 				else{
 					this.call_popup("необходимо заполнить поле", "255, 98, 98, 1");
 				}
 			}
 			catch(error){
-				console.error(error);
-				this.call_popup("попробуйте еще раз", "255, 98, 98, 1");
+				if(error.response.status == 401){
+					this.call_popup("пользователь не найден", "255, 98, 98, 1");
+				}
+				else{
+					console.error(error);
+					this.call_popup("попробуйте еще раз", "255, 98, 98, 1");
+				}
 			}
 		}
 	},

@@ -123,4 +123,4 @@ dmypy.json
 .pyre/
 
 # Node
-./frontend/node_modules
+./client/node_modules

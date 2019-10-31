@@ -17,6 +17,7 @@ $bg-dark: rgba(0, 0, 0, 0.65);
 	position: fixed;
 	height: 100vh;
 	width: 100vw;
+	top: 0px;
 	display: grid;
 	justify-items: center;
 	align-items: center;
@@ -120,6 +121,8 @@ $bg-dark: rgba(0, 0, 0, 0.65);
 button{
 	outline: none;
 	cursor: pointer;
+	background-color: transparent;
+	border: none;
 }
 *{
 	margin: 0px;
@@ -140,4 +143,16 @@ button{
 a{
 	text-decoration: none;
 	color: $white;
+}
+.icon-image{
+	height: 30px;
+	width: auto;
+}
+.close{
+	position: absolute;
+	top: 5vh;
+	right: 5vw;
+}
+input, textarea{
+	outline: none;
 }

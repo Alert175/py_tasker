@@ -1,17 +1,25 @@
 <template>
 	<div class="wrapper-fixed grid-center">
+		<div class="close" @click="close">
+			<img class="icon-image" src="images/cancel.svg" alt="close">
+		</div>
 		<div v-if="property === 'new_user'" class="content grid-center">
 			<div class="header">Как к Вам обращаться?</div>
-			<input type="text" v-model="new_user_name">
+			<div class="input_value grid-center">
+				<img class="icon-image" src="images/signature.svg" alt="edit_text_task">
+				<input type="text" v-model="new_user_name">
+			</div>
 			<button @click="regitry_new_user">Готово</button>
 		</div>
 		<div v-if="property === 'old_user'" class="content grid-center">
 			<div class="header">Введите ваш ID</div>
-			<input type="text" v-model="user_id">
+			<div class="input_value grid-center">
+				<img class="icon-image" src="images/signature.svg" alt="edit_text_task">
+				<input type="text" v-model="user_id">
+			</div>
 			<button @click="login">Войти</button>
 		</div>
 		<transition name="show" mode="out-in">
-			<buffer v-if="show_buffer" :user_id="info_for_buffer" @close_buffer="buffer_close"></buffer>
 			<popup v-if="show_popup" :info="info_for_popup" :color="popup_color" @close_popup="show_popup = false"></popup>
 		</transition>
 	</div>
@@ -20,7 +28,6 @@
 const axios = require("axios");
 export default {
 	components:{
-		buffer: ()=> import(/* webpackChunkName: "Buffer" */ "@/components/Buffer.vue"),
 		popup: ()=> import(/* webpackChunkName: "Popup" */ "@/components/Popup.vue")
 	},
 	props:{
@@ -32,7 +39,6 @@ export default {
 	data:()=>({
 		property: null,
 		new_user_name: null,
-		show_buffer: false,
 		info_for_buffer: null,
 		user_id: null,
 		show_popup: false,
@@ -51,12 +57,8 @@ export default {
 			this.popup_color = color;
 			this.show_popup = true;
 		},
-		buffer_close(){
-			this.show_buffer = false;
-			if(localStorage.getItem("user_id") !== null){
-				localStorage.setItem("auth", true);
-				this.$router.push("/");
-			}
+		close(){
+			this.$emit("close_modal");
 		},
 		async regitry_new_user(){
 			if(this.new_user_name !== null && this.new_user_name !== ""){
@@ -66,8 +68,11 @@ export default {
 					});
 					if(response.data.hasOwnProperty("id_user")){
 						localStorage.setItem("user_id", response.data.id_user)
-						this.info_for_buffer = response.data.id_user;
-						this.show_buffer = true;
+						localStorage.setItem("auth", true);
+						this.$router.push("/");
+					}
+					else{
+						console.log("id user not found");
 					}
 				}
 				catch(error){
@@ -110,7 +115,30 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-	.wrapper-fixed{}
+	.wrapper-fixed{
+		.content{
+			.input_value{
+				width: 90%;
+				grid-template-columns: auto 1fr;
+				padding: 5px;
+				margin: 5vh auto;
+				border-bottom: 1px solid $dark;
+				input{
+					width: 90%;
+					height: 100%;
+					border: none;
+				}
+			}
+			button{
+				margin: 5vh auto;
+				text-transform: uppercase;
+				font-size: 1.2rem;
+				padding: 10px 25px;
+				border: 1px solid $dark;
+				border-radius: 100px;
+			}
+		}
+	}
 	.show-enter-active, .show-leave-active {
 		transition: .5s;
 	}

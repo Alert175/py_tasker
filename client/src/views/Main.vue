@@ -1,15 +1,22 @@
 <template>
 	<div class="wrapper">
-		<div class="header">Задачи</div>
-			<div class="content">
-				<task class="tasks" v-for="(item, index) in user_tasks" :key="index" :task="item" :id_task="index"></task>
+		<div class="header grid-center">
+			<div class="user_info" @click="show_user_card = true">
+				<img class="icon-image" src="images/user.svg" alt="user_logo">
 			</div>
+			<div class="text grid-center">Задачи</div>
+		</div>
+		<div class="content" v-if="user_tasks.length">
+			<task class="tasks" v-for="(item, index) in user_tasks" :key="index" :task="item"></task>
+		</div>
+		<p v-else>Пока у вас нет записанных задач :)</p>
 		<div class="new_task grid-center">
 			<img src="images/plus-symbol.svg" alt="plus" @click="show_new_task = true">
 		</div>
 		<transition name="show" mode="out-in">
 			<popup v-if="show_popup" :info="info_for_popup" :color="popup_color" @close_popup="show_popup = false"></popup>
-			<new-task v-if="show_new_task" @close_new_task="show_new_task = false" @update_task_array="refresh_task_array"></new-task>
+			<new_task v-if="show_new_task" @close_new_task="show_new_task = false" @update_task_array="refresh_task_array"></new_task>
+			<user_card v-if="show_user_card" @close_user_info="show_user_card = false"></user_card>
 		</transition>
 	</div>
 </template>
@@ -20,7 +27,8 @@ export default {
 	components:{
 		popup: ()=> import(/* webpackChunkName: "Popup" */ "@/components/Popup.vue"),
 		task: ()=> import(/* webpackChunkName: "Task" */ "@/components/Task.vue"),
-		newTask: ()=> import(/* webpackChunkName: "NewTask" */ "@/components/NewTask.vue")
+		new_task: ()=> import(/* webpackChunkName: "NewTask" */ "@/components/NewTask.vue"),
+		user_card: ()=> import(/* webpackChunkName: "UserCard" */ "@/components/UserCard.vue")
 	},
 	data: ()=> ({
 		user_tasks: [],
@@ -29,7 +37,8 @@ export default {
 		show_popup: false,
 		info_for_popup: null,
 		popup_color: null,
-		show_new_task: false
+		show_new_task: false,
+		show_user_card: false
 	}),
 	methods: {
 		read_localStorage(){
@@ -79,8 +88,19 @@ export default {
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.wrapper{
+		.header{
+			grid-template-columns: auto 1fr;
+			width: 85%;
+			.text{
+				padding-right: 10%;
+			}
+		}
+		.content{
+			height: 70vh;
+			overflow: auto;
+		}
 		.new_task{
 			position: fixed;
 			top: auto;

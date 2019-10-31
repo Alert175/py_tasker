@@ -1,6 +1,8 @@
 <template>
 	<div class="wrapper-fixed">
-		<div class="close" @click="close">&#10006;</div>
+		<div class="close" @click="close">
+			<img class="icon-image" src="images/cancel.svg" alt="close">
+		</div>
 		<div class="content grid-center">
 			<div class="header">Новая задача</div>
 			<div class="text">
@@ -61,7 +63,6 @@ export default {
 			position: absolute;
 			top: 5vh;
 			right: 5vh;
-			font-size: 1.5rem;
 		}
 	}
 	.show-enter-active, .show-leave-active {

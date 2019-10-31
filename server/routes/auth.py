@@ -56,3 +56,21 @@ def login():
 				return make_response("internal error databases", 401)
 		else:
 			return(400)
+
+
+@auth.route("/delete_user", methods=["POST"])
+def delete_user():
+	if not request.json:
+		return make_response("invalid user data", 403)
+	else:
+		if not request.json["id_user"]:
+			return make_response("invalid user id", 403)
+		else:
+			try:
+				delete_user = db.info.remove({
+					"_id": ObjectId(request.json["id_user"])
+				})
+				return make_response("ok", 200)
+			except Exception as error:
+				print("internal error databases - {error}".format(error=error))
+				return make_response("internal error databases", 401)
